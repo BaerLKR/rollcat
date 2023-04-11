@@ -35,10 +35,14 @@ fn color(num: &i32, line: &i32) -> Vec<u8>{
     let mut color: Vec<u8> = vec![255, 105, 50];
     let mut mode: Vec<&str> = vec![".", ".", "."];
     let factor: u8 = 5;
-
+    let line = line.to_owned();
     let stelle = num.to_owned() as u8;
-
-    for _c in 0..(stelle + line.to_owned() as u8) {
+    let oberg = if line > 255 - stelle as i32 {
+        line - 255
+    } else {
+        line
+    };
+    for _c in 0..oberg as u8 {
         for i in 0..color.len() {
             if color[i] == 0 {
                 mode[i] = "+";
