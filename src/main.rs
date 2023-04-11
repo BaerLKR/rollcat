@@ -20,22 +20,25 @@ fn main() {
 }
 
 fn rollcat(input: String, line: i32) { 
-    let color = color(&line);
+    // let color = color(&line);
+    let mut ccount = 0;
     for c in input.chars() {
-        // print!("{}", c.to_string().truecolor(color[0], color[1], color[2]));
-        println!("{:?}", color);
+        ccount = ccount + 1;
+        let color = color(&ccount, &line);
+        print!("{}", c.to_string().truecolor(color[0], color[1], color[2]));
+        // println!("{:?}", color);
     }
     print!("\n");
 }
 
-fn color(num: &i32) -> Vec<u8>{
+fn color(num: &i32, line: &i32) -> Vec<u8>{
     let mut color: Vec<u8> = vec![255, 105, 50];
     let mut mode: Vec<&str> = vec![".", ".", "."];
     let factor: u8 = 5;
 
-    let anz = num.to_owned() as u8;
+    let stelle = num.to_owned() as u8;
 
-    for _c in 0..anz {
+    for _c in 0..(stelle + line.to_owned() as u8) {
         for i in 0..color.len() {
             if color[i] == 0 {
                 mode[i] = "+";
@@ -54,5 +57,5 @@ fn color(num: &i32) -> Vec<u8>{
             }
         }
     }
-     color
+    color
 }
