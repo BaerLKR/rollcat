@@ -18,6 +18,7 @@ fn main() {
             "-f" | "-i" => {
                 normal();
             },
+            "-v" => rollcat(String::from("Version: 1.0.0 "), 3),
             _ => help(),
         };
     } else {
@@ -119,6 +120,7 @@ fn help() {
     rollcat(String::from("  -h / --help / * => this help"), 1);
     rollcat(String::from("  -i => make the background colorful, not the text"), 1);
     rollcat(String::from("  -f [1 or 2] => the frequency (1 is slower and 2 faster)"), 1);
+    rollcat(String::from("  -v => version"), 1);
     println!("");
     rollcat(String::from("      by Lovis in Rust for fun"), 1);
     rollcat(String::from("      Licensed under EUPL 1.2"), 1);
