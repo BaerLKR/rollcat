@@ -37,7 +37,7 @@ fn normal() {
 
 fn rollcat(input: String, line: i32) { 
     let mut ccount = 0;
-    let mut frq = 1;
+    let mut frq = 5;
     let args: Vec<String> = env::args().collect();
     if args.len() > 1 {
         let q = &args[1];
@@ -52,7 +52,7 @@ fn rollcat(input: String, line: i32) {
                     }
                 }
             }
-            _ => println!("ERROR"),
+            _ => {}
         };
     }
     for c in input.chars() {
@@ -102,6 +102,7 @@ fn help() {
     rollcat(String::from("  It will read standart input and make it pwetty owo"), 1);
     println!("");
     rollcat(String::from("  -h / --help / * => this help"), 1);
+    rollcat(String::from("  -f [1 or 2] => the frequency (1 is slower and 2 faster)"), 1);
     println!("");
     rollcat(String::from("      by Lovis in Rust for fun"), 1);
     rollcat(String::from("      Licensed under EUPL 1.2"), 1);
