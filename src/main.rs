@@ -83,8 +83,8 @@ fn rollcat(input: String, line: i32) {
     print!("\n");
 }
 
-fn color(num: &i32, line: &i32, frq: i32) -> Vec<u8>{
-    let mut color: Vec<u8> = vec![255, 10, 100];
+fn color(num: &i32, line: &i32, frq: i32) -> Vec<u8> {
+    let mut color: Vec<u8> = vec![0, 250, 130];
     let mut mode: Vec<&str> = vec![".", ".", "."];
     let factor: u8 = frq as u8;
     let line = line.to_owned();
