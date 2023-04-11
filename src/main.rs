@@ -7,15 +7,24 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 use colored::*;
-use std::io::{self, BufRead, Read};
+use std::io::{self, BufRead};
+use std::env;
 
 fn main() {
-    let stdin = io::stdin();
-    let mut counter = 0;
-    for l in stdin.lock().lines() {
-        counter = counter + 1;
-        let line = String::from(l.unwrap());
-        rollcat(line, counter);
+    let args: Vec<String> = env::args().collect();
+    if args.len() > 1 {
+        let q = &args[1];
+        match q.as_str() {
+            _ => help(),
+        };
+    } else {
+        let stdin = io::stdin();
+        let mut counter = 0;
+        for l in stdin.lock().lines() {
+            counter = counter + 1;
+            let line = String::from(l.unwrap());
+            rollcat(line, counter);
+        }
     }
 }
 
@@ -38,9 +47,9 @@ fn color(num: &i32, line: &i32) -> Vec<u8>{
     let line = line.to_owned();
     let stelle = num.to_owned() as u8;
     let oberg = if line > 255 - stelle as i32 {
-        line - 255
+        stelle
     } else {
-        line
+        stelle + line as u8
     };
     for _c in 0..oberg as u8 {
         for i in 0..color.len() {
@@ -62,4 +71,9 @@ fn color(num: &i32, line: &i32) -> Vec<u8>{
         }
     }
     color
+}
+
+fn help() {
+    let info = String::from("This is a simple rewrite of the LOLCAT command in rust");
+    rollcat(info, 1);
 }
