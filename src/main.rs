@@ -31,6 +31,7 @@ fn normal() {
     for l in stdin.lock().lines() {
         counter = counter + 1;
         let line = String::from(l.unwrap());
+
         rollcat(line, counter);
     }
 }
@@ -59,7 +60,18 @@ fn rollcat(input: String, line: i32) {
             _ => {}
         };
     }
+    let mut cleaned_input = String::new();
+    let mut in_escape_sequence = false;
     for c in input.chars() {
+        if c == '\x1B' {
+            in_escape_sequence = true;
+        } else if in_escape_sequence && c.is_ascii_alphabetic() {
+            in_escape_sequence = false;
+        } else if !in_escape_sequence {
+            cleaned_input.push(c);
+        }
+    }
+    for c in cleaned_input.chars() {
         ccount = ccount + 1;
         let color = color(&ccount, &line, frq);
         if inv {
