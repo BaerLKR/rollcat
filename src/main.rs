@@ -15,7 +15,7 @@ fn main() {
     if args.len() > 1 {
         let q = &args[1];
         match q.as_str() {
-            "-f" => {
+            "-f" | "-i" => {
                 normal();
             },
             _ => help(),
@@ -38,6 +38,7 @@ fn normal() {
 fn rollcat(input: String, line: i32) { 
     let mut ccount = 0;
     let mut frq = 5;
+    let mut inv: bool = false;
     let args: Vec<String> = env::args().collect();
     if args.len() > 1 {
         let q = &args[1];
@@ -51,6 +52,9 @@ fn rollcat(input: String, line: i32) {
                         
                     }
                 }
+            },
+            "-i" => {
+                inv = true;
             }
             _ => {}
         };
@@ -58,7 +62,11 @@ fn rollcat(input: String, line: i32) {
     for c in input.chars() {
         ccount = ccount + 1;
         let color = color(&ccount, &line, frq);
-        print!("{}", c.to_string().truecolor(color[0], color[1], color[2]));
+        if inv {
+            print!("{}", c.to_string().on_truecolor(color[0], color[1], color[2]));
+        } else {
+            print!("{}", c.to_string().truecolor(color[0], color[1], color[2]));
+        }
     }
     print!("\n");
 }
@@ -97,6 +105,7 @@ fn help() {
     rollcat(String::from("  It will read standart input and make it pwetty owo"), 1);
     println!("");
     rollcat(String::from("  -h / --help / * => this help"), 1);
+    rollcat(String::from("  -i => make the background colorful, not the text"), 1);
     rollcat(String::from("  -f [1 or 2] => the frequency (1 is slower and 2 faster)"), 1);
     println!("");
     rollcat(String::from("      by Lovis in Rust for fun"), 1);
