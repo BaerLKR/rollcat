@@ -64,17 +64,12 @@ fn rollcat(input: String, line: i32) {
 }
 
 fn color(num: &i32, line: &i32, frq: i32) -> Vec<u8>{
-    let mut color: Vec<u8> = vec![255, 105, 50];
+    let mut color: Vec<u8> = vec![255, 10, 100];
     let mut mode: Vec<&str> = vec![".", ".", "."];
     let factor: u8 = frq as u8;
     let line = line.to_owned();
-    let stelle = num.to_owned() as u8;
-    let oberg = if line > 255 - stelle as i32 {
-        stelle
-    } else {
-        stelle + line as u8
-    };
-    for _c in 0..oberg as u8 {
+    let stelle = num.to_owned();
+    for _c in 0..stelle + line {
         for i in 0..color.len() {
             if color[i] == 0 {
                 mode[i] = "+";
