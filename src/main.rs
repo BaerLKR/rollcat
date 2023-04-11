@@ -22,15 +22,15 @@ fn main() {
 fn rollcat(input: String, line: i32) { 
     let color = color(&line);
     for c in input.chars() {
-        print!("{}", c.to_string().truecolor(color[0], color[1], color[2]));
+        print!("{}", c.to_string().truecolor(color[0] as u8, color[1] as u8, color[2] as u8));
     }
     print!("\n");
 }
 
-fn color(num: &i32) -> Vec<u8>{
-    let mut color: Vec<u8> = vec![255, 105, 50];
+fn color(num: &i32) -> Vec<i32>{
+    let mut color: Vec<i32> = vec![255, 105, 50];
     let mut mode: Vec<&str> = vec![".", ".", "."];
-    let factor: u8 = 1;
+    let factor: i32 = 2;
 
     let anz = num.to_owned();
 
@@ -40,7 +40,7 @@ fn color(num: &i32) -> Vec<u8>{
                 mode[i] = "+";
             }
 
-            if color[i] == 255 {
+            if color[i] == 255 || color[i] > 255 {
                 mode[i] = "-";
             }
         }
@@ -53,5 +53,5 @@ fn color(num: &i32) -> Vec<u8>{
             }
         }
     }
-    color
+     color
 }
