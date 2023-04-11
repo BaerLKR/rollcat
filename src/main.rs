@@ -15,35 +15,58 @@ fn main() {
     if args.len() > 1 {
         let q = &args[1];
         match q.as_str() {
+            "-f" => {
+                normal();
+            },
             _ => help(),
         };
     } else {
-        let stdin = io::stdin();
-        let mut counter = 0;
-        for l in stdin.lock().lines() {
-            counter = counter + 1;
-            let line = String::from(l.unwrap());
-            rollcat(line, counter);
-        }
+        normal();
+    }
+}
+
+fn normal() {
+    let stdin = io::stdin();
+    let mut counter = 0;
+    for l in stdin.lock().lines() {
+        counter = counter + 1;
+        let line = String::from(l.unwrap());
+        rollcat(line, counter);
     }
 }
 
 fn rollcat(input: String, line: i32) { 
-    // let color = color(&line);
     let mut ccount = 0;
+    let mut frq = 1;
+    let args: Vec<String> = env::args().collect();
+    if args.len() > 1 {
+        let q = &args[1];
+        match q.as_str() {
+            "-f" => {
+                if args.len() > 2 {
+                    match args[2].to_owned().as_str() {
+                        "1" => frq = 1,
+                        "2" => frq = 5,
+                        _ => println!("Error"),
+                        
+                    }
+                }
+            }
+            _ => println!("ERROR"),
+        };
+    }
     for c in input.chars() {
         ccount = ccount + 1;
-        let color = color(&ccount, &line);
+        let color = color(&ccount, &line, frq);
         print!("{}", c.to_string().truecolor(color[0], color[1], color[2]));
-        // println!("{:?}", color);
     }
     print!("\n");
 }
 
-fn color(num: &i32, line: &i32) -> Vec<u8>{
+fn color(num: &i32, line: &i32, frq: i32) -> Vec<u8>{
     let mut color: Vec<u8> = vec![255, 105, 50];
     let mut mode: Vec<&str> = vec![".", ".", "."];
-    let factor: u8 = 5;
+    let factor: u8 = frq as u8;
     let line = line.to_owned();
     let stelle = num.to_owned() as u8;
     let oberg = if line > 255 - stelle as i32 {
@@ -76,4 +99,10 @@ fn color(num: &i32, line: &i32) -> Vec<u8>{
 fn help() {
     let info = String::from("This is a simple rewrite of the LOLCAT command in rust");
     rollcat(info, 1);
+    rollcat(String::from("  It will read standart input and make it pwetty owo"), 1);
+    println!("");
+    rollcat(String::from("  -h / --help / * => this help"), 1);
+    println!("");
+    rollcat(String::from("      by Lovis in Rust for fun"), 1);
+    rollcat(String::from("      Licensed under EUPL 1.2"), 1);
 }
