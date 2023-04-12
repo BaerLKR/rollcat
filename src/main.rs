@@ -43,18 +43,20 @@ fn rollcat(input: String, line: i32) {
     let mut inv: bool = false;
     let args: Vec<String> = env::args().collect();
     if args.len() > 1 {
-        let q = &args[1];
-        match q.as_str() {
-            "-f1" => {
-                frq = 1;
-            },
-            "-f2" => {
-                frq = 5;
-            },
-            "-i" => {
-                inv = true;
+        for i in 0..args.len() {
+            let q = &args[i];
+            match q.as_str() {
+                "-f1" => {
+                    frq = 1;
+                },
+                "-f2" => {
+                    frq = 5;
+                },
+                "-i" => {
+                    inv = true;
+                }
+                _ => {}
             }
-            _ => {}
         };
     }
     let mut cleaned_input = String::new();
