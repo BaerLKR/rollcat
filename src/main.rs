@@ -15,7 +15,7 @@ fn main() {
     if args.len() > 1 {
         let q = &args[1];
         match q.as_str() {
-            "-f" | "-i" => {
+            "-f2" | "-f1" | "-i" => {
                 normal();
             },
             "-v" => rollcat(String::from("Version: 1.0.0 "), 3),
@@ -45,15 +45,11 @@ fn rollcat(input: String, line: i32) {
     if args.len() > 1 {
         let q = &args[1];
         match q.as_str() {
-            "-f" => {
-                if args.len() > 2 {
-                    match args[2].to_owned().as_str() {
-                        "1" => frq = 1,
-                        "2" => frq = 5,
-                        _ => println!("Error"),
-                        
-                    }
-                }
+            "-f1" => {
+                frq = 1;
+            },
+            "-f2" => {
+                frq = 5;
             },
             "-i" => {
                 inv = true;
@@ -117,11 +113,11 @@ fn help() {
     rollcat(info, 1);
     rollcat(String::from("  It will read standart input and make it pwetty owo"), 1);
     println!("");
-    rollcat(String::from("  -h / --help / * => this help"), 1);
-    rollcat(String::from("  -i => make the background colorful, not the text"), 1);
-    rollcat(String::from("  -f [1 or 2] => the frequency (1 is slower and 2 faster)"), 1);
-    rollcat(String::from("  -v => version"), 1);
+    rollcat(String::from("  -h / --help / * => this help"), 3);
+    rollcat(String::from("  -i => make the background colorful, not the text"), 5);
+    rollcat(String::from("  -f1 or -f2 => the frequency (1 is slower and 2 faster)"), 7);
+    rollcat(String::from("  -v => version"), 9);
     println!("");
-    rollcat(String::from("      by Lovis in Rust for fun"), 1);
-    rollcat(String::from("      Licensed under EUPL 1.2"), 1);
+    rollcat(String::from("      by Lovis in Rust for fun"), 12);
+    rollcat(String::from("      Licensed under EUPL 1.2"), 14);
 }
