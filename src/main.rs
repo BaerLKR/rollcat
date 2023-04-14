@@ -116,9 +116,9 @@ fn help() {
     rollcat(String::from("  It will read standart input and make it pwetty owo"), 1);
     println!("");
     rollcat(String::from("  -h / --help / * => this help"), 3);
-    rollcat(String::from("  -i => make the background colorful, not the text"), 5);
-    rollcat(String::from("  -f1 or -f2 => the frequency (1 is slower and 2 faster)"), 7);
-    rollcat(String::from("  -v => version"), 9);
+    rollcat(String::from("  -i              => make the background colorful, not the text"), 5);
+    rollcat(String::from("  -f1 or -f2      => the frequency (1 is slower and 2 faster)"), 7);
+    rollcat(String::from("  -v              => version"), 9);
     println!("");
     rollcat(String::from("      by Lovis in Rust for fun"), 12);
     rollcat(String::from("      Licensed under EUPL 1.2"), 14);
