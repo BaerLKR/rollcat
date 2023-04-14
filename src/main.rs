@@ -18,7 +18,7 @@ fn main() {
             "-f2" | "-f1" | "-i" => {
                 normal();
             },
-            "-v" => rollcat(String::from("Version: 1.0.0 "), 3),
+            "-v" => rollcat(String::from("Version: 1.1.0 "), 3),
             _ => help(),
         };
     } else {
